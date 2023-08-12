@@ -1,0 +1,35 @@
+.list_product_container{
+    padding-top: 15px;
+    width: 100%;
+    background-color: #fff4f8;
+    .list_product_container_chirld{
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-evenly;
+        .item_admin{
+            width: 31%;
+            background-color: #fff;
+            border-radius: 10px;
+            .item_admin_chirld{
+                display: flex;
+                align-items: center;
+                .item_img{
+                    width: 50%;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .detail_item_admin{
+                    padding-top: 10%;
+                    margin-bottom: 0px;
+                }
+              
+
+            }
+
+        }
+    }
+}

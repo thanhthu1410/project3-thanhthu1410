@@ -1,4 +1,5 @@
 export default {
     hello: "Chào Bạn",
-    about: "Về Tôi"
+    about: "Về Tôi",
+    
 }

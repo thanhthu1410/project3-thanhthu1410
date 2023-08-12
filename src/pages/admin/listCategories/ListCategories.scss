@@ -1,0 +1,36 @@
+.category_item{
+    width: 100%;
+   
+    p{  
+        border: 2px solid;
+        border-radius: 10px;
+        width: 400px;
+        padding: 10px;
+        margin: 10px;
+        font-size:1.3rem;
+    }
+}
+.admin_categories{
+    display: flex;
+    font-weight: 600;
+    .add_categories{
+        width: 50%;
+        .form_add{
+            padding: 10px;
+            border: 2px solid;
+            border-radius: 10px;
+            font-size: 18px;
+            button{
+                margin-top: 15px;
+                width: 150px;
+                padding: 5px 10px;
+                background-color: black;
+                color: #fff;
+            }
+           
+        }
+
+    }
+
+
+}

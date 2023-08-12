@@ -1,0 +1,33 @@
+.item_product{
+    // width: 90%;
+    height: 150px;
+    display: flex;
+    border-bottom: 1px solid;
+  
+    .item_img{
+        margin-left: 15px;
+        padding: 10px ;
+        width: 30%;
+        img {
+           
+            height: 100%;
+        }
+    }
+    .item_detail{
+        padding-top: 15px;
+        margin-left: 10%;
+        p{
+            margin: 0;
+        }
+    }
+}
+.cart_icon_container{
+    display: flex;
+    position: relative;
+    .quantityBag{
+        position: absolute;
+        left: 17px;
+        bottom: 2px;
+        font-size: 16px;
+    }
+}

@@ -14,6 +14,7 @@ const LazyLoad = (importFunc) => {
   return (props) => (
     <Suspense fallback={<Loading />}>
       <LazyComponent {...props} />
+      
     </Suspense>
   );
 };

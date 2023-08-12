@@ -1,0 +1,24 @@
+
+@import "@scss";
+.container_admin{
+    width: $maxW;
+    display: flex;
+    justify-content: center;
+    .container_admin_chirld{
+        min-height: 80vh;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        height: 100%;
+        .container_admin_left{
+            width: 20%;
+            border: 1px solid black;
+            padding-top: 30px;
+        }
+        .container_admin_right{
+            width: 80%;
+            
+              border: 1px solid black;
+        }
+    }
+}

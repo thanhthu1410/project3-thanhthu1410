@@ -1,0 +1,44 @@
+.search_container {
+    padding-top: 15px;
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+    justify-content: space-evenly;
+
+    .search_container_item {
+        width: 25%;
+        .name_item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search_item_img {
+            transition: transform 0.3s;
+            /* Thời gian chuyển đổi */
+        }
+
+        .search_item_img:hover {
+            transform: scale(1.2);
+            /* Phóng to hình ảnh lên 1.2 lần khi hover */
+        }
+
+    }
+}
+
+.loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left:0;
+    background-color: rgba(white, 0.8);
+    #skeleton-loadingCoffeeCup {
+      margin: 0;
+    }
+}

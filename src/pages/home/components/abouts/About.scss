@@ -1,0 +1,24 @@
+.items{
+    position: relative;
+
+    .title{
+        position: absolute;
+        top: 30%;
+        left: 35%;
+        color: #fff;
+        font-size: 30px;
+        width: 550px;
+      font-family:  'Poppins', sans-serif
+    }
+}
+.about_container{
+    display: flex;
+    justify-content: space-between;
+    .about_content{
+        width: 50%;
+        .about_content_item{
+            padding: 20%;
+        }
+    }
+    
+}

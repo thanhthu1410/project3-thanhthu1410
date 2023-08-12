@@ -22,8 +22,6 @@ export default {
       `${process.env.REACT_APP_SERVER_HOST_API}/users/authen-token`,
       data,
     )
-    .then(res => res)
-    .catch(err => err)
   },
   resend: async (data) => {
     return await axios.get(
@@ -52,5 +50,22 @@ export default {
   },
   find: async () => {
     return await axios.get(`${process.env.REACT_APP_SERVER_HOST_API}/users`);
+  },
+  updateAvatar: async (userId, formData) => {
+    return await axios.patch(
+      `${process.env.REACT_APP_SERVER_HOST_API}/users/${userId}/avatar`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
+    )
+  },
+  update: async (userId, data) => {
+    return await axios.patch(
+      `${process.env.REACT_APP_SERVER_HOST_API}/users/${userId}`,
+      data
+    )
   },
 };

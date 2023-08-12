@@ -1,0 +1,22 @@
+.container_addproduct{
+    display: flex;
+    width: 100%;
+   margin-top: 20px;
+    .add_product_left{
+        width: 40%
+    }
+    .add_product_right{
+         width: 60%;
+        
+          input{
+            color: black !important;
+            
+        }
+    }
+}
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+

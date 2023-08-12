@@ -1,88 +1,73 @@
-import React from 'react'
-import './Footer.css'
-export default function Footer() {
-  return (
-    <>
-  {/* FOOTER */}
-  <footer className="w-100 py-4 flex-shrink-0">
-    <div className="container py-4">
-      <div className="row gy-4 gx-5">
-        <div className="col-lg-4 col-md-6">
-          <h5 className="h1 text-white">FB.</h5>
-          <p className="small text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt.
-          </p>
-          <p className="small text-muted mb-0">
-            © Copyrights. All rights reserved.{" "}
-            <a className="text-primary" href="#">
-              Bootstrapious.com
-            </a>
-          </p>
-        </div>
-        <div className="col-lg-2 col-md-6">
-          <h5 className="text-white mb-3">Quick links</h5>
-          <ul className="list-unstyled text-muted">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Get started</a>
-            </li>
-            <li>
-              <a href="#">FAQ</a>
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-2 col-md-6">
-          <h5 className="text-white mb-3">Quick links</h5>
-          <ul className="list-unstyled text-muted">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Get started</a>
-            </li>
-            <li>
-              <a href="#">FAQ</a>
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <h5 className="text-white mb-3">Newsletter</h5>
-          <p className="small text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt.
-          </p>
-          <form action="#">
-            <div className="input-group mb-3">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Recipient's username"
-                aria-label="Recipient's username"
-                aria-describedby="button-addon2"
-              />
-              <button
-                className="btn btn-primary"
-                id="button-addon2"
-                type="button"
-              >
-                <i className="fas fa-paper-plane" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </footer>
-</>
+import React from 'react';
+import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 
-  )
+
+export default function Footer() {
+    return (
+        <div className='footer_container'>
+            <div className='footer_container_center'>
+            <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
+            <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
+                <div className='me-5 d-none d-lg-block'>
+                    <span>Get connected with us on social networks:</span>
+                </div>
+
+                <div>
+                    <a href='https://www.facebook.com/Vietnam.GongCha' className='me-4 text-reset'>
+                        <MDBIcon fab icon="facebook-f" />
+                    </a>
+                    <a href='https://www.instagram.com/gongchavietnam/' className='me-4 text-reset'>
+                        <MDBIcon fab icon="instagram" />
+                    </a>
+
+                    <a href='https://github.com/thanhthu1410' className='me-4 text-reset'>
+                        <MDBIcon fab icon="github" />
+                    </a>
+                </div>
+            </section>
+
+            <section className=''>
+                <MDBContainer className='text-center text-md-start mt-5'>
+                    <MDBRow className='mt-3'>
+                        <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
+                            <img style={{width:"150px",height:"70px"}} src="../../images/logobanner.png" alt="" />
+                            <p>
+                            Ⓒ 2021 GONG CHA GLOBAL LTD ALL RIGHTS RESERVED
+                            </p>
+                        </MDBCol>
+
+
+                        <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
+                            <h6 className='text-uppercase fw-bold mb-4'>ADDRESS</h6>
+                            <p>
+                                <MDBIcon icon="home" className="me-2" />
+                                No.42 Tu Cuong Street - Tan Binh District - HCM
+                            </p>
+                        </MDBCol>
+
+                        <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
+                            <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
+                           
+                            <p>
+                                <MDBIcon icon="envelope" className="me-3" />
+                               Rikkei@example.com
+                            </p>
+                            <p>
+                                <MDBIcon icon="print" className="me-3" /> + 01 234 567 89
+                            </p>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+            </section>
+
+            <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+                © 2023 Copyright: GongCha.ThanhThu
+                
+            </div>
+        </MDBFooter>
+        </div>
+        </div>
+        
+        
+    );
 }
