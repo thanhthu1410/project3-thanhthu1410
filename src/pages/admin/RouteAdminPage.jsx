@@ -31,5 +31,8 @@ export default (
         <Route path="/admin/add_product" element={LazyLoad(()=>import("./addproducts/AddProduct"))()}></Route>
         <Route path="/admin/list_categories" element={LazyLoad(()=>import("./listCategories/ListCategories"))()}></Route>
         <Route path="/admin/list_customer" element={LazyLoad(()=>import("./listcustomers/ListCustomer"))()}></Route>
+        <Route path="/admin/update_product/:id" element={LazyLoad(()=>import("./updateProducts/UpdateProduct"))()}></Route>
+        <Route path="/admin/receipt" element={LazyLoad(()=>import("./listReceipts/ListReceipt"))()}></Route>
+     
     </Route>
 )

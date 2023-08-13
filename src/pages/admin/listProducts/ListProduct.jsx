@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import "./ListProduct.scss"
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import UpdateProduct from '../updateProducts/UpdateProduct'
 
 export default function ListProduct() {
     const[listProducts,setListProducts] = useState([])
     useEffect(()=>{
         axios.get("http://localhost:4000/apis/v1/products")
-        .then((res)=>{console.log("res ne",setListProducts(res.data.data))})
+        .then((res)=>{setListProducts(res.data.data)})
         .catch((err)=>{
             
             console.log("catch");
             return
         })
     },[])
-   
+    console.log("listproduct",listProducts);
   return (
     <div className='list_product_container'>
         <div className='list_product_container_chirld'>
@@ -26,7 +28,8 @@ export default function ListProduct() {
                 <div className='detail_item_admin'>
                     <p>Name: {product.name}</p>
                     <p>Price: {product.Price}</p>
-                    <p>Active : 1</p>
+                    <p>Active : 1</p> 
+                    <Link to={`/admin/update_product/${product.id}`}>Update</Link>
                 </div>
                </div>
             </div>

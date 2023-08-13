@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import api from '@api';
 import { message } from 'antd';
-
+import Loading from  '../../lazy_loadings/components/Loading' 
 export default function Register() {
+  const [load, setLoad] = useState(false);
   const [errors, setErrors] = useState({});
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -27,14 +28,14 @@ export default function Register() {
       setErrors(validationErrors);
       return;
     }
-
+    setLoad(true);
     const result = await api.users.register(newUser);
-
+    setLoad(false);
     if (result.status !== 200) {
-      alert(result.response.data.message);
+      message.error(result.response.data.message);
     } else {
-      alert(result.data !== undefined ? result.data.message : result.message);
-      window.location.href == "/login"
+      message.success(result.data !== undefined ? result.data.message : result.message);
+      window.location.href = "/login"
     }
   };
 
@@ -211,6 +212,9 @@ export default function Register() {
           </div>
         </div>
       </div>
+      {
+        load ? <Loading/> : <></>
+      }
     </section>
   )
 }

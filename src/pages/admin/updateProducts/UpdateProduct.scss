@@ -1,0 +1,26 @@
+.container_update_prd{
+    width: 100%;
+    display: flex;
+    
+    .container_update_chirld{
+        width: 100%;
+        display: flex;
+        padding: 20px;
+        justify-content: space-evenly;
+
+        .update_left{
+        
+            padding-left: 20px;
+            .update_left_img{
+                width: 100%;
+                img{
+                    height: 280px;
+                }
+            }
+            button{
+                width: 150px;
+            }
+    
+        }
+    }
+}

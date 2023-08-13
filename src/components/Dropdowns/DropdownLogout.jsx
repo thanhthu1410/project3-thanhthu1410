@@ -24,17 +24,17 @@ export default function DropdownLogout({ userStore }) {
                
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
+                <li style={{cursor:"pointer"}}>
                     <a className="dropdown-item" href="/user_profile">
                         Profile
                     </a>
                 </li>
-                <li>
+                <li style={{cursor:"pointer"}}>
                     <a className="dropdown-item" href="/purchase">
                         Purchase History
                     </a>
                 </li>
-                <li>
+                <li style={{cursor:"pointer"}}>
                     <a className="dropdown-item" onClick={() => {
                         handleLogout()
                     }}>

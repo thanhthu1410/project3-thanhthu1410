@@ -21,7 +21,7 @@ function Home() {
         <div className="before_nav_content">
           <div className="feature">
             {userStore?.data?.role == "ADMIN" ? <Link to={'/admin'} className="feature_item">Admin</Link> : <Link to={'/'} className="feature_item">MemberShip</Link>}
-            <Link className="feature_item">Find a Store</Link>
+            <Link to={"/find"} className="feature_item">Find a Store</Link>
             <Link className="feature_item">Hi {userStore?.data?.first_name}  !</Link>
           </div>
         </div>

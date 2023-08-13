@@ -30,6 +30,7 @@ const App = () => {
             {icon: UploadOutlined, title: "Add Product", url : "/admin/add_product"}, 
             {icon: UploadOutlined, title: "List Categories",url : "/admin/list_categories"}, 
             {icon: UserOutlined, title: "List Customer", url : "/admin/list_customer"},
+            {icon: AppstoreOutlined, title: "Receipts", url : "/admin/receipt"},
           ].map(
             (item, index) => ({
               key: String(index + 1),

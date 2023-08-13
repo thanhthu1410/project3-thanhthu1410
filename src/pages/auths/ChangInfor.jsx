@@ -30,7 +30,7 @@ function Example() {
             setLoading(false);
             if (result.status == 200) {
                 md.confirm({
-                    content: `${result.data.message}, bạn sẽ phải đăng nhập lại!!`,
+                    content: `${result.data.message}, Please Login !!`,
                     onOk: () => {
                         localStorage.removeItem("token");
                         window.location.href = "/login";
@@ -72,13 +72,14 @@ function Example() {
 
             setLoading(false);
             if (result.status == 200) {
-                md.success({
-                    content: `${result.data.message}, bạn sẽ phải đăng nhập lại!!`,
-                    onOk: () => {
-                        localStorage.removeItem("token");
-                        window.location.reload();
-                    },
-                });
+                // md.success({
+                //     content: `${result.data.message}, please login !!`,
+                //     onOk: () => {
+                //         localStorage.setItem("token", result.data.token);
+                //        //window.location.reload();
+                //     },
+                // });
+                localStorage.setItem("token", result.data.token);
 
             } else {
                 md.error({
@@ -114,7 +115,7 @@ function Example() {
                 size='xl'
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Title>Update Profile</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form action="" onSubmit={(e) => {

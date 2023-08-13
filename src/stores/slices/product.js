@@ -26,11 +26,20 @@ const findAllCategory = createAsyncThunk(
             return result.data;
     });
 
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
         loading: true,
         data: null
+    },
+    reducers: {
+        addProduct: (state, action) => {
+            state.data.unshift(action.payload);
+        },
+        addProducts: (state, action) => {
+            state.data = [...action.payload];
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(find.fulfilled, (state, action) => {

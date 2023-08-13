@@ -55,6 +55,7 @@ export default function Cart() {
                 className="btn btn-primary"
                 data-toggle="modal"
                 data-target="#exampleModal2"
+                
             >
                 <div className='cart_icon_container'>
                     <i className="fa-solid fa-bag-shopping"></i>
@@ -70,7 +71,6 @@ export default function Cart() {
                 role="dialog"
                 aria-labelledby="exampleModalLabel1"
                 aria-hidden="true"
-
             >
                 <div className="modal-dialog modal-xl" role="document" >
                     <div className="modal-content">
@@ -96,11 +96,11 @@ export default function Cart() {
                             >
                                 Countinue
                             </button>
-                            {cartTotal != 0 ? <button type="button" onClick={() => navigate("/checkout")} className="btn btn-primary">
+                            {cartTotal != 0 ? <button type="button" onClick={() => navigate("/checkout")}  data-dismiss="modal" className="btn btn-primary">
                                 Check Out
                             </button> : <div></div>}
 
-                        </div>
+                        </div>s
                     </div>
                 </div>
             </div>

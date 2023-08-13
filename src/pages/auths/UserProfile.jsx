@@ -46,7 +46,7 @@ export default function ProfilePage() {
               <MDBCardBody className="text-center">
                 <MDBCardImage
                   src={userStore?.data?.avatar || ""}
-                  alt="avatar"
+                  alt=""
                   className="rounded-circle"
                   style={{ height: '250px' }}
                   fluid />

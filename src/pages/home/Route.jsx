@@ -16,6 +16,7 @@ export default (
       {/* {AdminRoute} */}
       <Route path="/menu/:category" element={LazyLoad(()=>import("../../components/Menus/Menu"))()}></Route>
       <Route path="/product/:id" element={LazyLoad(() => import("../../components/Menus/Item"))()}></Route>
+      <Route path="/find" element={LazyLoad(()=> import("../../components/Finds/FindStore"))()}></Route>
       {/* <Route path="/admin_page" element={<AdminPage/>}></Route> */}
       {AdminPageRoute}
      <Route path="/checkout" element={LazyLoad(()=>import("../home/components/checkouts/CheckOut"))()}></Route>

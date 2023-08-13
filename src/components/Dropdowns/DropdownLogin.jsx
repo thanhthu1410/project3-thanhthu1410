@@ -14,12 +14,12 @@ export default function DropdownLogin() {
                 <ion-icon name="person-outline"></ion-icon>
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li>
+                <li style={{cursor:"pointer"}}>
                     <a className="dropdown-item" href="register">
                         Register
                     </a>
                 </li>
-                <li>
+                <li style={{cursor:"pointer"}}>
                     <a className="dropdown-item" href="/login">
                         Login
                     </a>
