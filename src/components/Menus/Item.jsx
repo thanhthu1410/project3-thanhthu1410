@@ -10,7 +10,7 @@ import { convertToUSD } from '@mieuteacher/meomeojs';
 export default function Item() {
 
   const [note, setNote] = useState("");
-  const { productStore, dispatch, productActions, userStore, cartActions} = useContext(RootContext);
+  const { productStore, dispatch, productActions, userStore, cartActions, setLocalCartState, localCartState} = useContext(RootContext);
 
   useEffect(() => {
     AOS.init();
@@ -24,32 +24,69 @@ export default function Item() {
   }, [id]);
 
   async function addToCart(productId, quantity) {
-    console.log("productid",productId);
     const item = {
       product_id: parseInt(productId),
       quantity,
       note: note,
     };
 
+  if(localStorage.getItem("token")){
     api.purchase.addToCart(userStore.data.id,item)
     .then(res => {
       if (res.status == 200) {
-        dispatch(cartActions.addCart({
-          data: res.data.data,
-          quantity: item.quantity
-        }))
+        // dispatch(cartActions.addCart({
+        //   data: res.data.data,
+        //   quantity: item.quantity
+        // }))
+        api.purchase.findCart(userStore.data?.id)
+        .then(res => {
+          if (res.status == 200) {
+            // console.log("res.data?.data phuoc nekk", res.data?.data)
+            dispatch(cartActions.setCartData(res.data?.data))
+          } else {
+            alert('error')
+          }
+        }).catch(err => {
+          alert('sap !')
+        })
         message.success(res.data.message);
       } else {
         message.error(res.data.message);
       }
     })
     .catch(err => {
-      message.error("Failed to add product to cart");
+      message.error("Failed to add product to cart !!");
     })
 
+  }else{
+    let carts = localStorage.getItem("carts");
+    if (carts) {
+      carts = JSON.parse(carts);
+      let flag = false;
+      carts = carts.map((itemMap) => {
+        if (itemMap.product_id == item.product_id) {
+          itemMap.quantity += item.quantity;
+          flag = true;
+        }
+        message.success("ADD TO CART SUCCESSFULL !")
+        return itemMap;
+      });
+      if (!flag) {
+        carts.push(item);
+        message.success("ADD TO CART SUCCESSFULL !")
+      }
+      localStorage.setItem("carts", JSON.stringify(carts)); // save
+    } else {
+      let cartTemp = [];
+      cartTemp.push(item);
+      localStorage.setItem("carts", JSON.stringify(cartTemp)); // save
+      message.success("ADD TO CART SUCCESSFULL !")
+    }
+    setLocalCartState(!localCartState)
+  }
   }
   useEffect(()=>{
-    console.log("productStore",productStore);
+    //console.log("productStore",productStore);
   },[productStore])
 
   return (

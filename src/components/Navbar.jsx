@@ -10,6 +10,7 @@ import { RootContext } from '../App';
 export default function Navbar() {
   const[listCategories,setListCategories] = useState([])
   const { cartStore, userStore,setCartStoreRender,cartStoreRender} = useContext(RootContext);
+  
 
   useEffect(()=>{
       axios.get("http://localhost:4000/apis/v1/category")

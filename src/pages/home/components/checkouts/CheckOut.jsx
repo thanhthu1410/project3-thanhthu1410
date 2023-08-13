@@ -4,8 +4,20 @@ import Qr from "../qrs/Qr";
 import axios from 'axios';
 import { RootContext } from '../../../../App';
 import { message } from "antd"
+import api from '@api';
 export default function CheckOut() {
-  const { cartStore, userStore } = useContext(RootContext);
+  const { cartStore, userStore, dispatch, cartActions } = useContext(RootContext);
+  const [userName, setUserName] = useState("");
+  const [userPhone, setUserPhone] = useState("");
+  const [userAddress, setUserAddress] = useState("");
+  const [userEmail,setUserEmail] = useState("")
+  function validate() {
+    if(userName == '' || userPhone == '' || userAddress == ''|| userEmail == '') {
+      message.error('Please enter all the information!');
+      return false
+    }
+    return true
+  }
   useEffect(() => {
     console.log("cartStore", cartStore)
   }, [cartStore])
@@ -25,14 +37,17 @@ export default function CheckOut() {
       paid: eventForm.target.payment.value == "CASH" ? false : true,
       user_id: userStore.data.id
     };
+
     /* Req.body.receiptDetails */
     let receiptDetails = [];
     for (let i in cartStore.data.cart_details) {
+
       receiptDetails.push({
         product_id: cartStore.data.cart_details[i].product_id,
         quantity: cartStore.data.cart_details[i].quantity,
         note: cartStore.data.cart_details[i].note,
       });
+
     }
 
     /* Cash */
@@ -43,9 +58,10 @@ export default function CheckOut() {
       })
       .then((res) => {
         message.success("Thank You !");
-        window.location.href = "/"
+        window.location.href = "/purchase"
+
         // chuyển trang receipt
-        console.log(" save receipt", res.data);
+        //console.log(" save receipt", res.data);
       })
       .catch((err) => {
         console.log("err", err)
@@ -54,7 +70,7 @@ export default function CheckOut() {
     return;
   }
   function checkOut(eventForm) {
-    /* Zalo */
+    /* Zalo  */
     if (eventForm.target.payment.value == "ZALO") {
       axios
         .post("http://localhost:4000/apis/v1/purchase/zalo-create", {
@@ -82,6 +98,7 @@ export default function CheckOut() {
               title: `Scan with ZaloPay`,
               orderId: res.data.orderId,
             });
+
             setQrShow(true);
             /* 
                 Check kết quả giao dịch
@@ -145,14 +162,26 @@ export default function CheckOut() {
           {qrShow && qrData != null ? <Qr {...qrData} /> : <></>}
           <form >
             <label htmlFor="">Name</label>
-            <input type="text" name='name' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="text" name='username' value={userName}
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}  style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
            
             <label htmlFor="">Email</label>
-            <input type="email" name='email' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="email" name='userEmail' value={userEmail}
+                onChange={(e) => {
+                  setUserEmail(e.target.value);
+                }} style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
             <label htmlFor="">Phone Number</label>
-            <input type="number" name='phone' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="number" name='userPhone' value={userPhone}
+                onChange={(e) => {
+                  setUserPhone(e.target.value);
+                }} style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
             <label htmlFor="">Adress</label>
-            <input type="text" name='address' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="text"  name='userAddress' value={userAddress}
+                onChange={(e) => {
+                  setUserAddress(e.target.value);
+                }} style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
             <div style={{ marginTop: "25px" }}>
               <p>
                 Checked the information ?{' '}
@@ -181,10 +210,15 @@ export default function CheckOut() {
         <h5><i className="fa-brands fa-paypal"></i> PAYMENTS DETAILS</h5>
         <p>Payment Type :</p>
         {/* <label htmlFor="">CASH</label>  */}
-        <form onSubmit={(eventForm) => {
-          eventForm.preventDefault();
-          checkOut(eventForm);
-        }}>
+        <form 
+              onSubmit={(eventForm) => {
+                eventForm.preventDefault();
+                if(!validate()) {
+                  return 
+                }
+                checkOut(eventForm);
+              }}
+            >
           <div className='payment'>
             <img src="../../images/Logo-MoMo-Transparent.webp" alt="" style={{ width: "50px", height: "30px" }} />
             <input style={{ height: "25px", width: "30px", display: "inline-block" }} name='payment' value={"CASH"} type="radio" />

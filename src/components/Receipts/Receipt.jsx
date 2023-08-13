@@ -12,7 +12,7 @@ export default function Order() {
     const [receipts, setReceipts] = useState(receiptStore.data)
 
     useEffect(() => {
-        console.log("receipts", receipts)
+        //console.log("receipts", receipts)
     }, [receiptStore])
 
     return (

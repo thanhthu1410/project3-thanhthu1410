@@ -11,7 +11,7 @@ export default function Menu() {
        useEffect(()=>{
         dispatch(productActions.findCategories(category))
         setDataLoaded(true);
-        console.log("category",productStore);
+        //console.log("category",productStore);
     },[category])
   
     return (

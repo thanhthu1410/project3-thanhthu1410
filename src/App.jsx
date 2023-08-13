@@ -15,6 +15,7 @@ export const RootContext = createContext()
 function App() {
   const store = useSelector(store => store)
   const dispatch = useDispatch();
+  const [localCartState,setLocalCartState ] = useState(false)
   // const [cartStoreRender, setCartStoreRender] = useState(null);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ function App() {
 
 
   useEffect(() => {
-    console.log("receiptStore", store.receiptStore)
+    //console.log("receiptStore", store.receiptStore)
   }, [store])
   return (
     <RootContext.Provider value={{
@@ -74,7 +75,9 @@ function App() {
       productActions,
       dispatch,
       useSelector,
-      receiptStore: store.receiptStore
+      receiptStore: store.receiptStore,
+      localCartState,
+      setLocalCartState
       // setCartStoreRender,
       // cartStoreRender
     }} >

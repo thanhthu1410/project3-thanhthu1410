@@ -6,7 +6,7 @@
   box-sizing: border-box
 }
 
-.ant-message {
+.ant-message, .ant-modal-root {
   z-index: 9000000 !important;
   position: fixed !important;
 }

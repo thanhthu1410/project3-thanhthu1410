@@ -22,7 +22,7 @@ export default function Carousel() {
             >
               Original Tea
             </h4>
-            <p className="fz-default fc-W wow fadeInUp" data-wow-delay=".9s">
+            <p className="fz-default fc-W wow fadeInUp" data-wow-delay=".9s" style={{color:"#fff"}}>
                Our original teas are made with high-quality tea leaves that are brewed to perfection so you’ll want to sit and savor your selection.
               <br />
               <br />

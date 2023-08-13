@@ -4,29 +4,49 @@ import CartItem from './CartItem';
 import { RootContext } from '../../App';
 import { convertToUSD } from '@mieuteacher/meomeojs';
 import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 export default function Cart() {
-    const { cartStore } = useContext(RootContext);
+    const { cartStore ,localCartState ,setLocalCartState } = useContext(RootContext);
     const [cartItems, setCartItems] = useState(null);
     const navigate = useNavigate()
-
-    // const [cartTotal, setCartTotal] = useState(0);
-
     useEffect(() => {
         if (cartStore.data) {
             setCartItems(cartStore.data.cart_details)
         }
     }, [cartStore.data])
-   
-    const  cartTotal = cartStore.data?.cart_details?.reduce((total, product) => {
-        return total + product.quantity
-    }, 0);
-    const  subTotal = cartStore?.data?.cart_details?.reduce((total, product) => {
-        return total + (product.quantity * Number(product.product.Price))
-    }, 0);
-   
+    const[cartLocalCount, setCartLocalCount] = useState(null);
+    const[cartLocalTotal, setCartLocalTotal] = useState(null);
+    async function generateDataCart() {
+        let carts = JSON.parse(localStorage.getItem("carts"));
+        for (let i in carts) {
+           carts[i].product = (await api.products.findProductById(carts[i].product_id).then(res => res.data.data))[0];
+        }
+        setCartItems(carts);
+
+        setCartLocalCount(carts?.reduce((total, product) => {
+            return total + product.quantity
+        }, 0));
+
+        setCartLocalTotal(carts?.reduce((total, product) => {
+            return total + (product.quantity * product.product.Price)
+        }, 0));
+    }
+    
     useEffect(() => {
-        console.log("cartStore", cartStore)
-    }, [cartStore.data])
+      if(!localStorage.getItem("token")) {
+        if(localStorage.getItem("carts")) {
+          generateDataCart();
+        }
+      }
+    }, [localCartState])
+  
+    // console.log("cartTotalLocal",cartTotalLocal);
+    const cartTotal = cartStore.data?.cart_details?.reduce((total, product) => {
+        return total + product.quantity
+    }, 0) ?? 0;
+    const subTotal = cartStore?.data?.cart_details?.reduce((total, product) => {
+        return total + (product.quantity * Number(product.product.Price))
+    }, 0) ?? 0;
     return (
         <>
             <button
@@ -38,7 +58,7 @@ export default function Cart() {
             >
                 <div className='cart_icon_container'>
                     <i className="fa-solid fa-bag-shopping"></i>
-                    <span className='quantityBag' >{cartTotal}</span>
+                    <span className='quantityBag' >    {cartLocalCount != null ? cartLocalCount : cartTotal}</span>
                 </div>
 
             </button>
@@ -64,8 +84,8 @@ export default function Cart() {
 
                         </div>
                         <div style={{ marginLeft: "30px" }}>
-                            <span>You have {cartTotal} items in your cart !  </span> <br />
-                            <span>Sub Total : {subTotal ? `${convertToUSD(subTotal)}` : 0}</span>
+                            <span>You have {cartLocalCount != null ? cartLocalCount : cartTotal} items in your cart !  </span> <br />
+                            <span>Sub Total : { cartLocalTotal != null ? `${convertToUSD(cartLocalTotal)}` :`${convertToUSD(subTotal)}`}</span>
 
                         </div>
                         <div className="modal-footer">
@@ -79,7 +99,7 @@ export default function Cart() {
                             {cartTotal != 0 ? <button type="button" onClick={() => navigate("/checkout")} className="btn btn-primary">
                                 Check Out
                             </button> : <div></div>}
-                            
+
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import validate from '@utils/validate';
 import api from '@api';
-import  {message} from 'antd';
+import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
@@ -18,13 +18,15 @@ export default function Login() {
           <div className="col col-xl-10">
             <div className="card" style={{ borderRadius: "1rem" }}>
               <div className="row g-0">
-                <div className="col-md-6 col-lg-5 d-none d-md-block">
+                <div className="col-md-6 col-lg-5 d-none d-md-block" onClick={()=> {
+                  window.location.href = "/"
+                }}>
                   <img
-                  
+
                     src="../../images/login.jpg"
                     alt="login form"
                     className="img-fluid"
-                    style={{ borderRadius: "1rem 0 0 1rem", height: "100%",paddingTop:"30%" }}
+                    style={{ borderRadius: "1rem 0 0 1rem", height: "100%", paddingTop: "30%" }}
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -37,27 +39,77 @@ export default function Login() {
                           password: e.target.password.value,
                           type: !validate.isEmail(e.target.user_name.value) // Email false, User Name true
                         }
-                        console.log("data",data);
-                  
                         try {
                           let result = await api.users.login(data);
                           if (result.status == 200) {
                             if (result.data.token == undefined) {
-                              message.error("Login Failed!")
+                              Modal.error({
+                                content: `${result.data.message}`,
+                              });
                             } else {
-                              localStorage.setItem("token", result.data.token);
+                              localStorage.setItem( "token", result.data.token)
                               message.success("Login Successfull !")
-                                setTimeout(()=>{
-                                  window.location.href = "/"
-                                },2000)                          
+                              setTimeout(() => {
+                                window.location.href = "/"
+                              }, 2000)
+
+                              if (localStorage.getItem("carts")) {
+                                let carts = JSON.parse(
+                                  localStorage.getItem("carts"),
+                                );
+                                await carts.map(async (item) => {
+                                  await api.purchase
+                                    .addToCart(result.data.userId, item)
+                                    .then((res) => {
+                                      console.log("res", res);
+                                    })
+                                    .catch((err) => {
+                                      alert("looix");
+                                    });
+                                  return item;
+                                });
+                                localStorage.removeItem("carts")
+                                Modal.success({
+                                  content: `${result.data.message}`,
+                                  onOk: () => {
+                                    window.location.href = "/";
+                                  },
+                                });
+                              } else {
+                                Modal.success({
+                                  content: `${result.data.message}`,
+                                  onOk: () => {
+                                    window.location.href = "/";
+                                  },
+                                });
+                              }
                             }
                           } else {
-                            console.log("result.data.message",result.data.message);
-                            alert(result.data.message)
+                            alert(result.data.message);
                           }
                         } catch (err) {
-                            console.log("err",err);
+                          err;
                         }
+
+                        // try {
+                        //   let result = await api.users.login(data);
+                        //   if (result.status == 200) {
+                        //     if (result.data.token == undefined) {
+                        //       message.error("Login Failed!")
+                        //     } else {
+                        //       localStorage.setItem("token", result.data.token);
+                        //       message.success("Login Successfull !")
+                        //         setTimeout(()=>{
+                        //           window.location.href = "/"
+                        //         },2000)                          
+                        //     }
+                        //   } else {
+                        //     console.log("result.data.message",result.data.message);
+                        //     alert(result.data.message)
+                        //   }
+                        // } catch (err) {
+                        //     console.log("err",err);
+                        // }
 
                       }}
                     >

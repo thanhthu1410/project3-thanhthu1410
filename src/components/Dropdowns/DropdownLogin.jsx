@@ -20,7 +20,7 @@ export default function DropdownLogin() {
                     </a>
                 </li>
                 <li>
-                    <a className="dropdown-item" href="login">
+                    <a className="dropdown-item" href="/login">
                         Login
                     </a>
                 </li>
