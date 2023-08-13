@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import "./Receipt.scss";
-import { convertToVND, randomId } from '@mieuteacher/meomeojs';
+import { convertToUSD, randomId } from '@mieuteacher/meomeojs';
 import { RootContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 export default function Order() {
     const [isLogin, setIsLogin] = useState(() => localStorage.getItem("token") || null)
@@ -16,6 +17,8 @@ export default function Order() {
 
     return (
         <div>
+            <div className='header-receipt'><Link to={"/"}>Home</Link> / Purchase Page</div>
+            
             {isLogin ? (receipts?.map((receipt, index) =>
                 <section className="h-100 gradient-custom" id='order' key={randomId()}>
                     <div className="container py-5 h-100">
@@ -48,15 +51,15 @@ export default function Order() {
                                                                 alt="Phone"
                                                             />
                                                         </div>
-                                                        <div className="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p className="text-muted mb-0">name</p>
+                                                        <div className="col-md-2 text-center d-flex justify-content-center align-items-center" style={{width:"250px"}}>
+                                                            <p className="text-muted mb-0" >{product.product.name}</p>
                                                         </div>
 
                                                         <div className="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p className="text-muted mb-0 small">Quantity:</p>
+                                                            <p className="text-muted mb-0 small">Quantity: {product.quantity}</p>
                                                         </div>
                                                         <div className="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                            <p className="text-muted mb-0 small">price</p>
+                                                            <p className="text-muted mb-0 small">Price : {convertToUSD(product.product.Price)}</p>
                                                         </div>
                                                     </div>
                                                     <hr
@@ -100,14 +103,23 @@ export default function Order() {
                                         )}
                                         <div className="d-flex justify-content-between pt-2">
                                             <p className="fw-bold mb-0">Order Details</p>
-                                            {/* <p className="text-muted mb-0">
-                                                <span className="fw-bold me-4">Total</span> {convertToVND(receipt.reduce((total, food) => {
-                                                    return total + food.quantity * food.price
+                                            <p className="text-muted mb-0">
+                                                <span className="fw-bold me-4">Total</span>{convertToUSD(receipt.receipt_details.reduce((total, product) => {
+                                                    return total + product.quantity * product.product.Price
                                                 }, 0))}
-                                            </p> */}
+                                            </p>
                                         </div>
                                         <div className="d-flex justify-content-between">
-                                            <p className="text-muted mb-0">Invoice Date : </p>
+                                            <p className="text-muted mb-0">RECEIPT CODE: {receipt.receipt_code}</p>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="text-muted mb-0">Invoice Date : {receipt.update_at}</p>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="text-muted mb-0">PAY MODE: {receipt.pay_mode}</p>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <p className="text-muted mb-0">Paid : {receipt.paid ? "Paid" : "UnPaid"}</p>
                                         </div>
                                     </div>
                                     <div
@@ -118,11 +130,11 @@ export default function Order() {
                                             borderBottomRightRadius: 10
                                         }}
                                     >
-                                        {/* <h5 className="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
-                                            Total paid: <span className="h2 mb-0 ms-2">{convertToVND(receipt.reduce((total, food) => {
-                                                return total + food.quantity * food.price
-                                            }, 0))}</span>
-                                        </h5> */}
+                                        <h5 className="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                                            Total paid: <span className="h2 mb-0 ms-2">{convertToUSD(receipt.receipt_details.reduce((total, product) => {
+                                                    return total + product.quantity * product.product.Price
+                                                }, 0))}</span>
+                                        </h5>
                                     </div>
                                 </div>
                             </div>

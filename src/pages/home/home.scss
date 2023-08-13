@@ -83,7 +83,7 @@
         justify-content: space-between;
         font-size: 1em;
         height: 100%;
-        width: 10%;
+        // width: 10%;
         .logo {
           width: 65px;
           height: 80%;
@@ -109,10 +109,10 @@
         }
       }
       .right_content {
-        width: 23%;
+        width: 16%;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        // margin-right: -60px;
       }
     }
   }

@@ -76,9 +76,10 @@ export default function Cart() {
                             >
                                 Countinue
                             </button>
-                            <button type="button" onClick={() => navigate("/checkout")} className="btn btn-primary">
+                            {cartTotal != 0 ? <button type="button" onClick={() => navigate("/checkout")} className="btn btn-primary">
                                 Check Out
-                            </button>
+                            </button> : <div></div>}
+                            
                         </div>
                     </div>
                 </div>

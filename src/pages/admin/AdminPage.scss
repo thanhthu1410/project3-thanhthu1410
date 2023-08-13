@@ -1,5 +1,6 @@
 .ant-layout-content {
     margin: 78px 16px !important;
+    padding: 0px !important;
 }
 .ant-layout-sider-children{
     background-color: #fff4f8  !important;
@@ -10,4 +11,13 @@
         }
     }
     
+}
+
+.ant-layout {
+    background-color: rgb(255, 244, 248);
+}
+
+.ant-layout-header {
+    background-color:  rgb(255, 244, 248) !important;
+    max-width: 1240px !important;
 }

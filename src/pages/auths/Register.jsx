@@ -34,6 +34,7 @@ export default function Register() {
       alert(result.response.data.message);
     } else {
       alert(result.data !== undefined ? result.data.message : result.message);
+      window.location.href == "/login"
     }
   };
 
@@ -85,7 +86,7 @@ export default function Register() {
                       Sign up
                     </p>
                     <form className="mx-1 mx-md-4"
-                
+
                       onSubmit={handleFormSubmit}
                     >
                       <div className="d-flex flex-row align-items-center mb-4">

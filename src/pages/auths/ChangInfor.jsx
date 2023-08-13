@@ -29,11 +29,11 @@ function Example() {
             let result = await api.users.update(userStore.data?.id, user);
             setLoading(false);
             if (result.status == 200) {
-                md.success({
+                md.confirm({
                     content: `${result.data.message}, bạn sẽ phải đăng nhập lại!!`,
                     onOk: () => {
                         localStorage.removeItem("token");
-                        window.location.reload();
+                        window.location.href = "/login";
                     },
                 });
             } else {
@@ -133,16 +133,16 @@ function Example() {
                                 <input type="text" name='first_name' defaultValue={userStore.data?.first_name ?? "undefine"} style={{ border: "1px solid black", width: "500px", color: "black", borderRadius: "8px", padding: "10px", margin: "5px" }} />
                                 <label htmlFor="">First Name : </label>
                                 <input type="text" name='last_name' defaultValue={userStore.data?.last_name ?? "undefine"} style={{ border: "1px solid black", width: "500px", color: "black", borderRadius: "8px", padding: "10px", margin: "5px" }} />
-                                <button className='form_btn' htmlType='submit' type="primary" ghost>Save</button>
+                                <button  htmlType='submit' style={{width:"150px",borderRadius:"8px",padding:"5px",marginTop:"15px",color:"#fff",backgroundColor:"black"}} ghost>Save</button>
                             </div>
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary">Understood</Button>
+                  
                 </Modal.Footer>
             </Modal>
         </>

@@ -35,7 +35,7 @@ export default function CartItem({ cartItems }) {
      
         if(typeBtn == "-") {
             if(quantity == 1) {
-                if(window.confirm("xóa ok!")) {
+                if(window.confirm(`Are you sure to delete ${cartItems.product.name}??`)) {
                     api.purchase.updateCart(userStore?.data?.id,{
                         type: 0,
                         cart_detail_record_edited: {

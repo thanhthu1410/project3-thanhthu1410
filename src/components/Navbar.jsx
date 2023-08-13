@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <nav>
       <div className="nav_content">
-        <div className="left_content">
+        <div className="left_content" style={{width:"200px"}}>
           {/* Logo */}
           <img src="../../images/logo11.jpg" className="logo" />
         </div>
@@ -67,7 +67,8 @@ export default function Navbar() {
         <div className="right_content">
           <span><Search /></span>
           {/* Wishlist */}
-          <i className="fa-regular fa-heart"></i>
+          <Link to={"/news"}> <i style={{ color: "#6e2e27" }} className="fa-regular fa-heart"></i></Link>
+         
           {/* Cart */}
           <span><Cart cartStore={cartStore} /></span>
           <span>

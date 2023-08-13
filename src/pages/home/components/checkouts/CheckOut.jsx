@@ -3,7 +3,7 @@ import "./CheckOut.scss"
 import Qr from "../qrs/Qr";
 import axios from 'axios';
 import { RootContext } from '../../../../App';
-import {message} from "antd"
+import { message } from "antd"
 export default function CheckOut() {
   const { cartStore, userStore } = useContext(RootContext);
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function CheckOut() {
       }, 0),
       pay_mode: eventForm.target.payment.value,
       paid: eventForm.target.payment.value == "CASH" ? false : true,
-      user_id : userStore.data.id
+      user_id: userStore.data.id
     };
     /* Req.body.receiptDetails */
     let receiptDetails = [];
@@ -42,10 +42,10 @@ export default function CheckOut() {
         receiptDetails,
       })
       .then((res) => {
-        message.success("Cảm ơn bạn đã mua hàng!");
+        message.success("Thank You !");
         window.location.href = "/"
         // chuyển trang receipt
-        console.log("Đã save receipt", res.data);
+        console.log(" save receipt", res.data);
       })
       .catch((err) => {
         console.log("err", err)
@@ -127,7 +127,13 @@ export default function CheckOut() {
       saveReceipt(eventForm);
     }
   }
- 
+  const [confirmed, setConfirmed] = useState(false);
+
+  const handleClick = () => {
+    setConfirmed(true);
+  };
+
+
 
   return (
 
@@ -137,15 +143,37 @@ export default function CheckOut() {
         <div className='checkout_form_top'>
           <h5><i className="fa-solid fa-user"></i> PERSONAL INFORMATION</h5>
           {qrShow && qrData != null ? <Qr {...qrData} /> : <></>}
-          <form>
+          <form >
             <label htmlFor="">Name</label>
-            <input type="text" style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="text" name='name' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+           
             <label htmlFor="">Email</label>
-            <input type="email" style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="email" name='email' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
             <label htmlFor="">Phone Number</label>
-            <input type="number" style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="number" name='phone' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
             <label htmlFor="">Adress</label>
-            <input type="text" style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <input type="text" name='address' style={{ border: "2px solid black", borderRadius: "8px", color: "black", height: "23px", padding: "21px" }} />
+            <div style={{ marginTop: "25px" }}>
+              <p>
+                Checked the information ?{' '}
+                <button
+                  className='check_infor'
+                  style={{
+                    width: "50px",
+                    backgroundColor: "#fff",
+                    color: "black",
+                    borderRadius: "8px",
+                    padding: "5px",
+                    border: "2px solid black"
+                  }}
+                  type='submit'
+                  onClick={handleClick}
+                  disabled={confirmed}
+                >
+                  {confirmed ? <i className="fa-solid fa-check"></i> : 'x'}
+                </button>{' '}
+              </p>
+            </div>
           </form>
         </div>
       </div>
@@ -166,7 +194,7 @@ export default function CheckOut() {
             <input style={{ height: "25px", width: "25px", display: "inline-block" }} name='payment' value={"ZALO"} type="radio" />
           </div>
           <div className='payment'>
-            <img src="../../images/money.jpg" style={{width:"55px"}} />
+            <img src="../../images/money.jpg" style={{ width: "55px" }} />
             <input style={{ height: "25px", width: "30px", display: "inline-block" }} name='payment' value={"CASH"} type="radio" />
           </div>
           <button className='button_checkout' type='submit' style={{ width: "100%", padding: "5px", backgroundColor: "black", color: "#fff", borderRadius: "8px", marginTop: "25px" }}>CHECK OUT</button>

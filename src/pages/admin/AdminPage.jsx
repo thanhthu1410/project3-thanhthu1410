@@ -26,10 +26,10 @@ const App = () => {
           mode="inline"
           defaultSelectedKeys={['0']}
           items={[
-            {icon: UserOutlined, title: "List Product", url: "/admin"}, 
-            {icon: VideoCameraOutlined, title: "Add Product", url : "/admin/add_product"}, 
+            {icon: AppstoreOutlined, title: "List Product", url: "/admin"}, 
+            {icon: UploadOutlined, title: "Add Product", url : "/admin/add_product"}, 
             {icon: UploadOutlined, title: "List Categories",url : "/admin/list_categories"}, 
-            {icon: UserOutlined, title: "Add Caregories", url : "/admin/list_customer"},
+            {icon: UserOutlined, title: "List Customer", url : "/admin/list_customer"},
           ].map(
             (item, index) => ({
               key: String(index + 1),
@@ -61,7 +61,7 @@ const App = () => {
               height: 64,
             }}
           />
-       
+          <span style={{marginLeft: "500px", fontSize: "30px", fontWeight:"bold", color: "rgb(110, 46, 39)"}}>Admin</span>
         </Header>
         <Content
           style={{

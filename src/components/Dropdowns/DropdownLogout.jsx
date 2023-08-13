@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function DropdownLogout({ userStore }) {
     const navigate = useNavigate();
     const handleLogout = () => {
-        if (window.confirm("Bạn có muốn đăng xuất không?")) {
+        if (window.confirm("Do you want to log out ?")) {
             localStorage.removeItem("token");
             // dispatch(userLoginActions.logOut());
             navigate("/login");

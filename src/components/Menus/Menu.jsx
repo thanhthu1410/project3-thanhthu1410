@@ -17,7 +17,7 @@ export default function Menu() {
     return (
         <div style={{ backgroundColor: "#f5eee8" }}>
             <div className='title_container'>
-                <h2>Gong.Cha</h2>
+                <img src="../../images/titleMenu.png" alt="" />
             </div>
            
             <div className='render_container'>
@@ -25,12 +25,12 @@ export default function Menu() {
                 {
                   productStore?.data?.map((item,index)=>(
                         <div className='item_container' key={index} >
-                            <div data-aos-delay="500" className='item_container_chirld' >
-                                <div className='item_img'data-aos="fade-up"  >
+                            <div  className='item_container_chirld' >
+                                <div className='item_img'  >
                                     <img style={{ width: "100%" }} src={item.avatar} alt="" />
                                 </div>
-                                <div className='name_item'data-aos="fade-up"  >
-                                    <h4>Name : {item.name}</h4>
+                                <div className='name_item'  >
+                                    <h4><i className="fa-regular fa-heart"></i> {item.name}</h4>
                                 </div>
                             <button className='detail_button'><Link to={`/product/${item.id}`}>Detail</Link></button>
                           

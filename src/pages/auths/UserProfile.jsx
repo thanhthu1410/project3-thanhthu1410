@@ -27,7 +27,7 @@ export default function ProfilePage() {
         console.log("userStore",userStore.data);
     })
   return (
-    <section style={{ backgroundColor: '#eee', marginTop:"130px" }}>
+    <section style={{ backgroundColor: 'rgb(255, 244, 248)', marginTop:"130px" }}>
       <MDBContainer className="py-5">
         <MDBRow>
           <MDBCol>

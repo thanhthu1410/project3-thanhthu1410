@@ -9,6 +9,8 @@
         flex-wrap: wrap;
         gap: 10px;
         justify-content: space-evenly;
+        max-height: 560px;
+        overflow-y: scroll;
         .item_admin{
             width: 31%;
             background-color: #fff;
@@ -19,7 +21,8 @@
                 .item_img{
                     width: 50%;
                     img {
-                        width: 100%;
+                        // width: 100%;
+                        width: 150px;
                     }
                 }
                 .detail_item_admin{
