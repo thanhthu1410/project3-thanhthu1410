@@ -105,7 +105,7 @@ export default function CheckOut() {
             */
             let tradeInterval;
             let cancelTrade = setTimeout(() => {
-              // sau 10' hủy giao dịch (600000)
+              // sau 1' hủy giao dịch (600000)
               clearInterval(tradeInterval);
               setQrShow(false);
               setQrData(null);
